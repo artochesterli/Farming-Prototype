@@ -36,11 +36,35 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
+	private abstract class AlertState : SlimeState
+	{
+		private GameObject _player;
+
+		public override void OnEnter()
+		{
+			base.OnEnter();
+			_player = GameObject.FindGameObjectWithTag("Player");
+			Debug.Assert(_player != null, "Player Object Not Found");
+		}
+
+		public override void Update()
+		{
+			base.Update();
+
+		}
+
+		private bool HasPlayerInFront()
+		{
+			// TODO
+			return false;
+		}
+	}
+
 	/// <summary>
 	/// Slime defaultly switch between Idle State
 	/// and Wonder Walk Randomly State
 	/// </summary>
-	private class SlimeIdleState : SlimeState
+	private class SlimeIdleState : AlertState
 	{
 		private float _idleTimer;
 		public override void OnEnter()
@@ -67,7 +91,7 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
-	private class SlimeIdleMoveState : SlimeState
+	private class SlimeIdleMoveState : AlertState
 	{
 		private float _moveTimer;
 

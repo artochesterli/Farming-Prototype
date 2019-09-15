@@ -40,7 +40,14 @@ public abstract class MonsterBase : MonoBehaviour
 				transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Vector3.left);
 				break;
 		}
-		print("Base Movement");
+	}
 
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		foreach (Sight s in _MonsterData.Sights)
+		{
+
+		}
 	}
 }

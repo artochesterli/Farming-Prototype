@@ -10,4 +10,9 @@ public abstract class MonsterBaseScriptableObject : ScriptableObject
 
 	public float IdleMoveMinDuration = 0.5f;
 	public float IdleMoveMaxDuration = 1.5f;
+
+	/// <summary>
+	/// All Sights Combined
+	/// </summary>
+	public List<Sight> Sights;
 }

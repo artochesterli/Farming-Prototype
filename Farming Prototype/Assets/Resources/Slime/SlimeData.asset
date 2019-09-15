@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7729a2a7abdb4e14cbfe25fbd899453c, type: 3}
   m_Name: SlimeData
   m_EditorClassIdentifier: 
-  MovingSpeed: 1
+  MovingSpeed: 0.5
   IdleMinDuration: 0.5
   IdleMaxDuration: 4
   IdleMoveMinDuration: 0.5
   IdleMoveMaxDuration: 1.5
+  Sights:
+  - Radius: 1
+    Angle: 120
+    StartAngle: 150
