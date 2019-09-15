@@ -7,13 +7,6 @@ public abstract class MonsterBase : MonoBehaviour
 {
 	public MonsterBaseScriptableObject _MonsterData;
 	protected Animator _Animator;
-	protected enum MonsterDirection
-	{
-		Down,
-		Up,
-		Left,
-		Right
-	}
 
 	protected MonsterDirection _MonsterDirection;
 
@@ -23,21 +16,32 @@ public abstract class MonsterBase : MonoBehaviour
 		_Animator = GetComponent<Animator>();
 	}
 
-	protected virtual void _BaseMovement()
+	protected virtual void _BasicMovement()
 	{
-		switch (_MonsterDirection)
+		transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Utility.DegreeToVector2(90f * (int)_MonsterDirection));
+	}
+
+	protected virtual void _BasicMovement(float customSpeed)
+	{
+		transform.Translate(customSpeed * Time.deltaTime * Utility.DegreeToVector2(90f * (int)_MonsterDirection));
+	}
+
+	protected void _TurnDirection(MonsterDirection _dir)
+	{
+		_MonsterDirection = _dir;
+		switch (_dir)
 		{
 			case MonsterDirection.Down:
-				transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Vector3.down);
+				_Animator.SetBool("MoveDown", true);
 				break;
 			case MonsterDirection.Up:
-				transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Vector3.up);
-				break;
-			case MonsterDirection.Right:
-				transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Vector3.right);
+				_Animator.SetBool("MoveUp", true);
 				break;
 			case MonsterDirection.Left:
-				transform.Translate(_MonsterData.MovingSpeed * Time.deltaTime * Vector3.left);
+				_Animator.SetBool("MoveLeft", true);
+				break;
+			case MonsterDirection.Right:
+				_Animator.SetBool("MoveRight", true);
 				break;
 		}
 	}

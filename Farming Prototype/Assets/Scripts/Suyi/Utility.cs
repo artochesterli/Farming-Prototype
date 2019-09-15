@@ -29,3 +29,11 @@ public class Sight
 	/// </summary>
 	public float StartAngle = 90f;
 }
+
+public enum MonsterDirection
+{
+	Down = 3,
+	Up = 1,
+	Left = 2,
+	Right = 0,
+}

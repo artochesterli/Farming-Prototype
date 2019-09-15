@@ -21,3 +21,6 @@ MonoBehaviour:
   - Radius: 1
     Angle: 120
     StartAngle: 150
+  ExclamationPrefab: {fileID: 5645123994355838992, guid: e3bd3592201c8a547beb8f8a50bc27fd,
+    type: 3}
+  ExclamationDuration: 1.2
