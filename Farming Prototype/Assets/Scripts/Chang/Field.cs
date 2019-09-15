@@ -56,7 +56,14 @@ public class Field : MonoBehaviour
             {
                 WetTimeCount = 0;
                 State = FieldState.Dry;
+                if (Seed)
+                {
+                    Plant = Seed.GetComponent<Seed>().Plant;
+                    Seed.GetComponent<Seed>().GrowPlant();
+                    Seed = null;
+                }
             }
         }
     }
+
 }
