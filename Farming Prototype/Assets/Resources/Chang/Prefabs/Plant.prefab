@@ -93,4 +93,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def0bb54ba85df24e954f60d49496254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  YPivot: -0.5
+  YPivot: -0.7
