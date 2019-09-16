@@ -30,5 +30,5 @@ MonoBehaviour:
   SlimeWaterPrefab: {fileID: 8665475599579241624, guid: 2548f774468600b4ca4197113aeef6c1,
     type: 3}
   SlimeWaterExistanceDuration: 15
-  SlimeWaterEmitInterval: 1
-  SlimeWaterSuprisedEmitInterval: 0.5
+  SlimeWaterEmitInterval: 0.5
+  SlimeWaterSuprisedEmitInterval: 0.25
