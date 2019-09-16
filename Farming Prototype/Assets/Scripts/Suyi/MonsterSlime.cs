@@ -20,6 +20,17 @@ public class MonsterSlime : MonsterBase
 		_slimeFSM.Update();
 	}
 
+	IEnumerator _emitSlimeWater(float time)
+	{
+		SlimeData sd = _MonsterData as SlimeData;
+		while (true)
+		{
+			GameObject go = Instantiate(sd.SlimeWaterPrefab, transform.position, Quaternion.identity);
+			Destroy(go, (sd.SlimeWaterExistanceDuration));
+			yield return new WaitForSeconds(time);
+		}
+	}
+
 	private abstract class SlimeState : FSM<MonsterSlime>.State
 	{
 		protected SlimeData _SlimeData;
@@ -60,7 +71,6 @@ public class MonsterSlime : MonsterBase
 
 		private bool _hasPlayerInFront()
 		{
-			// TODO
 			// 1. Player is in range
 			// 2. Player is in angle
 			foreach (Sight s in _SlimeData.Sights)
@@ -109,6 +119,7 @@ public class MonsterSlime : MonsterBase
 	private class SlimeIdleMoveState : AlertState
 	{
 		private float _moveTimer;
+		private IEnumerator _emitSlime;
 
 		public override void OnEnter()
 		{
@@ -118,6 +129,8 @@ public class MonsterSlime : MonsterBase
 			MonsterDirection randomDirection = (MonsterDirection)values.GetValue(rand.Next(values.Length));
 			Context._TurnDirection(randomDirection);
 			_moveTimer = Time.time + UnityEngine.Random.Range(_SlimeData.IdleMoveMinDuration, _SlimeData.IdleMoveMaxDuration);
+			_emitSlime = Context._emitSlimeWater(_SlimeData.SlimeWaterEmitInterval);
+			Context.StartCoroutine(_emitSlime);
 		}
 
 		public override void Update()
@@ -137,6 +150,7 @@ public class MonsterSlime : MonsterBase
 		public override void OnExit()
 		{
 			base.OnExit();
+			Context.StopCoroutine(_emitSlime);
 			switch (Context._MonsterDirection)
 			{
 				case MonsterDirection.Down:
@@ -181,6 +195,8 @@ public class MonsterSlime : MonsterBase
 	private class SlimeRunAwayState : SlimeState
 	{
 		private float _moveTimer;
+		private IEnumerator _emitSlime;
+
 		public override void OnEnter()
 		{
 			base.OnEnter();
@@ -201,6 +217,8 @@ public class MonsterSlime : MonsterBase
 					Context._TurnDirection(MonsterDirection.Left);
 					break;
 			}
+			_emitSlime = Context._emitSlimeWater(_SlimeData.SlimeWaterSuprisedEmitInterval);
+			Context.StartCoroutine(_emitSlime);
 		}
 
 		public override void Update()
@@ -220,6 +238,7 @@ public class MonsterSlime : MonsterBase
 		public override void OnExit()
 		{
 			base.OnExit();
+			Context.StopCoroutine(_emitSlime);
 			switch (Context._MonsterDirection)
 			{
 				case MonsterDirection.Down:
