@@ -33,8 +33,12 @@ public class MonsterSlime : MonsterBase
 
 	public override bool OnCaptured()
 	{
-		_slimeFSM.TransitionTo<CapturedIdleState>();
-		return true;
+		if (_slimeFSM.CurrentState.GetType().BaseType.Equals(typeof(AlertState)))
+		{
+			_slimeFSM.TransitionTo<CapturedIdleState>();
+			return true;
+		}
+		return false;
 	}
 
 	private abstract class SlimeState : FSM<MonsterSlime>.State
@@ -60,7 +64,82 @@ public class MonsterSlime : MonsterBase
 
 	private class CapturedIdleState : CapturedState
 	{
+		private float _idleTimer;
+		public override void OnEnter()
+		{
+			base.OnEnter();
+			Context._Animator.SetBool("Idle", true);
+			_idleTimer = Time.time + UnityEngine.Random.Range(_SlimeData.IdleMinDuration, _SlimeData.IdleMaxDuration);
+		}
 
+		public override void Update()
+		{
+			base.Update();
+			if (_idleTimer < Time.time)
+			{
+				TransitionTo<SlimeIdleMoveState>();
+				return;
+			}
+		}
+
+		public override void OnExit()
+		{
+			base.OnExit();
+			Context._Animator.SetBool("Idle", false);
+		}
+	}
+
+	private class CapturedIdleMoveState : CapturedState
+	{
+		private float _moveTimer;
+		private IEnumerator _emitSlime;
+
+		public override void OnEnter()
+		{
+			base.OnEnter();
+			Array values = Enum.GetValues(typeof(MonsterDirection));
+			System.Random rand = new System.Random();
+			MonsterDirection randomDirection = (MonsterDirection)values.GetValue(rand.Next(values.Length));
+			Context._TurnDirection(randomDirection);
+			_moveTimer = Time.time + UnityEngine.Random.Range(_SlimeData.IdleMoveMinDuration, _SlimeData.IdleMoveMaxDuration);
+			_emitSlime = Context._emitSlimeWater(_SlimeData.SlimeWaterEmitInterval);
+			Context.StartCoroutine(_emitSlime);
+		}
+
+		public override void Update()
+		{
+			base.Update();
+			if (_moveTimer < Time.time)
+			{
+				TransitionTo<SlimeIdleState>();
+				return;
+			}
+			else
+			{
+				Context._BasicMovement();
+			}
+		}
+
+		public override void OnExit()
+		{
+			base.OnExit();
+			Context.StopCoroutine(_emitSlime);
+			switch (Context._MonsterDirection)
+			{
+				case MonsterDirection.Down:
+					Context._Animator.SetBool("MoveDown", false);
+					break;
+				case MonsterDirection.Up:
+					Context._Animator.SetBool("MoveUp", false);
+					break;
+				case MonsterDirection.Left:
+					Context._Animator.SetBool("MoveLeft", false);
+					break;
+				case MonsterDirection.Right:
+					Context._Animator.SetBool("MoveRight", false);
+					break;
+			}
+		}
 	}
 
 	private abstract class AlertState : WildState
@@ -91,7 +170,7 @@ public class MonsterSlime : MonsterBase
 			foreach (Sight s in _SlimeData.Sights)
 			{
 				if (Vector2.Distance(_player.transform.position, Context.transform.position) <= s.Radius
-					 && Vector2.Angle(Utility.DegreeToVector2(90f * (int)Context._MonsterDirection), _player.transform.position - Context.transform.position) < s.Angle / 2f)
+					 && Vector2.Angle(Utility.DegreeToVector2(90f * (int)Context._MonsterDirection + s.AngleOffset), _player.transform.position - Context.transform.position) < s.Angle / 2f)
 				{
 					return true;
 				}

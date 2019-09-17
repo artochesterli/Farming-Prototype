@@ -18,8 +18,8 @@ public class MonsterBaseEditor : Editor
 		Handles.color = Color.red;
 		foreach (Sight s in mb._MonsterData.Sights)
 		{
-			Handles.DrawSolidArc(mb.transform.position, -mb.transform.forward, Utility.DegreeToVector2(90f * (int)mb._MonsterDirection), s.Angle / 2f, s.Radius);
-			Handles.DrawSolidArc(mb.transform.position, mb.transform.forward, Utility.DegreeToVector2(90f * (int)mb._MonsterDirection), s.Angle / 2f, s.Radius);
+			Handles.DrawSolidArc(mb.transform.position, -mb.transform.forward, Utility.DegreeToVector2(90f * (int)mb._MonsterDirection + s.AngleOffset), s.Angle / 2f, s.Radius);
+			Handles.DrawSolidArc(mb.transform.position, mb.transform.forward, Utility.DegreeToVector2(90f * (int)mb._MonsterDirection + s.AngleOffset), s.Angle / 2f, s.Radius);
 		}
 	}
 }
