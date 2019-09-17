@@ -70,7 +70,12 @@ public class CharacterMoveInfo : MonoBehaviour
 
 	public void Move()
 	{
+        if (GetComponent<CharacterStateManager>().State == CharacterState.Fall)
+        {
+            Speed = Vector2.zero;
+        }
 		Vector2 temp = Speed;
+        
 
 		if (TopDis < temp.y * Time.deltaTime)
 		{
