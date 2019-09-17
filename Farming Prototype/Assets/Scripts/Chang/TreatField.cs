@@ -104,7 +104,7 @@ public class TreatField : MonoBehaviour
                 {
                     if (FieldStandOn)
                     {
-                        FieldStandOn.GetComponent<Field>().State = FieldState.Wet;
+                        WaterField();
                         EventManager.instance.Fire(new VitalityChange(VitalityManager.Vitality -= VitalityManager.WaterCost));
                     }
                 }
@@ -146,5 +146,10 @@ public class TreatField : MonoBehaviour
     private bool InputAvailable()
     {
         return Input.GetMouseButtonDown(0);
+    }
+
+    public void WaterField()
+    {
+        FieldStandOn.GetComponent<Field>().State = FieldState.Wet;
     }
 }
