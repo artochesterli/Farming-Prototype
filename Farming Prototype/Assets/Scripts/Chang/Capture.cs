@@ -6,6 +6,7 @@ public class Capture : MonoBehaviour
 {
 	public float CaptureDis;
 	public GameObject CaptureNet;
+    public GameObject AllCapturedMonster;
 
 	private bool CaptureNetActive;
 	// Start is called before the first frame update
@@ -51,7 +52,10 @@ public class Capture : MonoBehaviour
 				{
 					ItemHoldingInfo.MonsterCaptured[0].number++;
 					EventManager.instance.Fire(new SetMonsterNum(ItemHoldingInfo.MonsterCaptured[0].number));
-					Destroy(Captureables[i]);
+                    Captureables[i].transform.parent = AllCapturedMonster.transform;
+                    Captureables[i].SetActive(false);
+                    Debug.Log(Captureables[i]);
+					//Destroy(Captureables[i]);
 				}
 
 			}
