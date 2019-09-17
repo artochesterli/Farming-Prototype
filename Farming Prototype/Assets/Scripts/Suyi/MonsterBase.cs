@@ -8,7 +8,7 @@ public abstract class MonsterBase : MonoBehaviour
 	public MonsterBaseScriptableObject _MonsterData;
 	protected Animator _Animator;
 
-	protected MonsterDirection _MonsterDirection;
+	public MonsterDirection _MonsterDirection { get; protected set; }
 
 	protected virtual void Awake()
 	{

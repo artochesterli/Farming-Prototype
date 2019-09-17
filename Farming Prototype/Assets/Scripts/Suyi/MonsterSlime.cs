@@ -76,7 +76,7 @@ public class MonsterSlime : MonsterBase
 			foreach (Sight s in _SlimeData.Sights)
 			{
 				if (Vector2.Distance(_player.transform.position, Context.transform.position) <= s.Radius
-					 && Vector2.Angle(Utility.DegreeToVector2(90f * (int)Context._MonsterDirection), _player.transform.position - Context.transform.position) < s.Angle)
+					 && Vector2.Angle(Utility.DegreeToVector2(90f * (int)Context._MonsterDirection), _player.transform.position - Context.transform.position) < s.Angle / 2f)
 				{
 					return true;
 				}

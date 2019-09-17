@@ -390,6 +390,9 @@ MonoBehaviour:
   ColliderHeight: 0.2
   DetectMargin: 0.01
   PivotPoint: {x: 0, y: -0.54}
+  layermask:
+    serializedVersion: 2
+    m_Bits: 567
 --- !u!114 &272737004
 MonoBehaviour:
   m_ObjectHideFlags: 0
