@@ -30,6 +30,9 @@ MonoBehaviour:
   ExclamationPrefab: {fileID: 5645123994355838992, guid: e3bd3592201c8a547beb8f8a50bc27fd,
     type: 3}
   ExclamationDuration: 0.2
+  FieldLayer:
+    serializedVersion: 2
+    m_Bits: 256
   SlimeWaterPrefab: {fileID: 8665475599579241624, guid: 2548f774468600b4ca4197113aeef6c1,
     type: 3}
   SlimeWaterExistanceDuration: 15

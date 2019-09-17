@@ -21,4 +21,6 @@ public abstract class MonsterBaseScriptableObject : ScriptableObject
 	public List<Sight> Sights;
 	public GameObject ExclamationPrefab;
 	public float ExclamationDuration;
+
+	public LayerMask FieldLayer;
 }

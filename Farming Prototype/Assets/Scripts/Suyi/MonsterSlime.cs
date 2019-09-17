@@ -31,6 +31,17 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
+	private void _waterField()
+	{
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, 50f, _MonsterData.FieldLayer);
+		if (hit.collider != null &&
+			hit.collider.GetComponent<Field>())
+		{
+			hit.collider.GetComponent<Field>().WaterField();
+			print("Watered Field");
+		}
+	}
+
 	public override bool OnCaptured()
 	{
 		if (_slimeFSM.CurrentState.GetType().BaseType.Equals(typeof(AlertState)))
@@ -77,7 +88,7 @@ public class MonsterSlime : MonsterBase
 			base.Update();
 			if (_idleTimer < Time.time)
 			{
-				TransitionTo<SlimeIdleMoveState>();
+				TransitionTo<CapturedIdleMoveState>();
 				return;
 			}
 		}
@@ -111,12 +122,13 @@ public class MonsterSlime : MonsterBase
 			base.Update();
 			if (_moveTimer < Time.time)
 			{
-				TransitionTo<SlimeIdleState>();
+				TransitionTo<CapturedIdleState>();
 				return;
 			}
 			else
 			{
 				Context._BasicMovement();
+				Context._waterField();
 			}
 		}
 
