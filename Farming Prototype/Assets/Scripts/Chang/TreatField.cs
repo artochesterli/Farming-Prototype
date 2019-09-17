@@ -131,9 +131,12 @@ public class TreatField : MonoBehaviour
                     {
                         ItemHoldingInfo.MonsterCaptured[0].number--;
                         EventManager.instance.Fire(new SetMonsterNum(ItemHoldInfo.MonsterCaptured[0].number));
-                        GameObject Monster = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/WaterElement"), FieldStandOn.transform.position, Quaternion.Euler(0, 0, 0));
-                        Monster.GetComponent<MonsterStateInfo>().State = MonsterState.Captured;
-                        Monster.GetComponent<MonsterStateInfo>().SetAttributes();
+                        //GameObject Monster = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/WaterElement"), FieldStandOn.transform.position, Quaternion.Euler(0, 0, 0));
+                        GameObject Monster = transform.Find("AllCapturedMonster").GetChild(0).gameObject;
+                        Monster.transform.parent = null;
+                        Monster.SetActive(true);
+                        //Monster.GetComponent<MonsterStateInfo>().State = MonsterState.Captured;
+                        //Monster.GetComponent<MonsterStateInfo>().SetAttributes();
                     }
                 }
             }
