@@ -154,7 +154,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Idle
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: MoveLeft
+    m_ConditionEvent: MoveDown
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2392645329383160231}
