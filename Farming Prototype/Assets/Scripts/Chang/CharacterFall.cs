@@ -31,4 +31,9 @@ public class CharacterFall : MonoBehaviour
             Destroy(hit.collider.gameObject);
         }
     }
+
+    public void SetCharacterFall()
+    {
+        GetComponent<CharacterStateManager>().State = CharacterState.Fall;
+    }
 }
