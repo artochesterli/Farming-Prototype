@@ -23,7 +23,10 @@ MonoBehaviour:
   Sights:
   - Radius: 1
     Angle: 120
-    StartAngle: 150
+    AngleOffset: 0
+  - Radius: 1
+    Angle: 60
+    AngleOffset: 180
   ExclamationPrefab: {fileID: 5645123994355838992, guid: e3bd3592201c8a547beb8f8a50bc27fd,
     type: 3}
   ExclamationDuration: 0.2

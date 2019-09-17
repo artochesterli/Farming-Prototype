@@ -27,7 +27,7 @@ public class Sight
 	/// <summary>
 	/// Start Angle Sweeps Right
 	/// </summary>
-	public float StartAngle = 90f;
+	public float AngleOffset = 0f;
 }
 
 public enum MonsterDirection
