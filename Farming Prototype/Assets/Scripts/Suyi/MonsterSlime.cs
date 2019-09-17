@@ -33,8 +33,12 @@ public class MonsterSlime : MonsterBase
 
 	public override bool OnCaptured()
 	{
-		_slimeFSM.TransitionTo<CapturedIdleState>();
-		return true;
+		if (_slimeFSM.CurrentState.GetType().BaseType.Equals(typeof(AlertState)))
+		{
+			_slimeFSM.TransitionTo<CapturedIdleState>();
+			return true;
+		}
+		return false;
 	}
 
 	private abstract class SlimeState : FSM<MonsterSlime>.State
