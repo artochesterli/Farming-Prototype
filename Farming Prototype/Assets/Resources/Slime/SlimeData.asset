@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7729a2a7abdb4e14cbfe25fbd899453c, type: 3}
   m_Name: SlimeData
   m_EditorClassIdentifier: 
-  MovingSpeed: 1.6
+  MovingSpeed: 2.08
   IdleMinDuration: 0.5
   IdleMaxDuration: 4
   IdleMoveMinDuration: 0.5
   IdleMoveMaxDuration: 1.5
   FleeMinDuration: 1.5
   FleeMaxDuration: 2.5
-  FleeMovingSpeed: 3
+  FleeMovingSpeed: 3.9
   Sights:
   - Radius: 1
     Angle: 120
@@ -30,5 +30,5 @@ MonoBehaviour:
   SlimeWaterPrefab: {fileID: 8665475599579241624, guid: 2548f774468600b4ca4197113aeef6c1,
     type: 3}
   SlimeWaterExistanceDuration: 15
-  SlimeWaterEmitInterval: 0.25
-  SlimeWaterSuprisedEmitInterval: 0.125
+  SlimeWaterEmitInterval: 0.1923077
+  SlimeWaterSuprisedEmitInterval: 0.09615385

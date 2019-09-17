@@ -31,6 +31,12 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
+	public override bool OnCaptured()
+	{
+		_slimeFSM.TransitionTo<CapturedIdleState>();
+		return true;
+	}
+
 	private abstract class SlimeState : FSM<MonsterSlime>.State
 	{
 		protected SlimeData _SlimeData;
@@ -48,7 +54,16 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
-	private abstract class AlertState : SlimeState
+	private abstract class WildState : SlimeState { }
+
+	private abstract class CapturedState : SlimeState { }
+
+	private class CapturedIdleState : CapturedState
+	{
+
+	}
+
+	private abstract class AlertState : WildState
 	{
 		private GameObject _player;
 
@@ -169,7 +184,7 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
-	private class SlimeSurprisedState : SlimeState
+	private class SlimeSurprisedState : WildState
 	{
 		public override void OnEnter()
 		{
@@ -192,7 +207,7 @@ public class MonsterSlime : MonsterBase
 		}
 	}
 
-	private class SlimeRunAwayState : SlimeState
+	private class SlimeRunAwayState : WildState
 	{
 		private float _moveTimer;
 		private IEnumerator _emitSlime;
@@ -202,21 +217,14 @@ public class MonsterSlime : MonsterBase
 			base.OnEnter();
 			_moveTimer = Time.time + UnityEngine.Random.Range(_SlimeData.FleeMinDuration, _SlimeData.FleeMaxDuration);
 			// Run Towards the opposite direciton of current direction
-			switch (Context._MonsterDirection)
+			Array values = Enum.GetValues(typeof(MonsterDirection));
+			System.Random rand = new System.Random();
+			MonsterDirection randomDirection = (MonsterDirection)values.GetValue(rand.Next(values.Length));
+			while (randomDirection == Context._MonsterDirection)
 			{
-				case MonsterDirection.Down:
-					Context._TurnDirection(MonsterDirection.Up);
-					break;
-				case MonsterDirection.Up:
-					Context._TurnDirection(MonsterDirection.Down);
-					break;
-				case MonsterDirection.Left:
-					Context._TurnDirection(MonsterDirection.Right);
-					break;
-				case MonsterDirection.Right:
-					Context._TurnDirection(MonsterDirection.Left);
-					break;
+				randomDirection = (MonsterDirection)values.GetValue(rand.Next(values.Length));
 			}
+			Context._TurnDirection(randomDirection);
 			_emitSlime = Context._emitSlimeWater(_SlimeData.SlimeWaterSuprisedEmitInterval);
 			Context.StartCoroutine(_emitSlime);
 		}

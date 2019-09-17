@@ -46,6 +46,8 @@ public abstract class MonsterBase : MonoBehaviour
 		}
 	}
 
+	public abstract bool OnCaptured();
+
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
