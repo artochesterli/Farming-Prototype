@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalSpeed: 12
   StickySlowDownSpeed: 2
-  DodgeDis: 4
+  DodgeDis: 6
   DodgeTime: 0.2
   DodgeCoolDown: 2
   ThornNumber: 3
@@ -138,3 +138,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c908712d13e69849b9bf717899d3944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentState: 0

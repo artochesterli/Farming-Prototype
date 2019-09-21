@@ -7,7 +7,7 @@ public class DryadData : MonoBehaviour
     public float NormalSpeed = 12;
     public float StickySlowDownSpeed = 1;
 
-    public float DodgeDis = 4;
+    public float DodgeDis = 6;
     public float DodgeTime = 0.2f;
     public float DodgeCoolDown = 2;
 

@@ -5,9 +5,8 @@ using UnityEngine;
 public class CharacterMove : MonoBehaviour
 {
     public float Speed;
-    public CharacterController characterController;
 
-
+    private Vector3 MoveVector;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +21,7 @@ public class CharacterMove : MonoBehaviour
 
     private void CheckInput()
     {
-        Vector3 MoveVector = Vector3.zero;
+        MoveVector = Vector3.zero;
 
         bool HaveInput = false;
 
@@ -53,7 +52,8 @@ public class CharacterMove : MonoBehaviour
         {
             transform.eulerAngles = Vector3.up * Vector3.SignedAngle(Vector3.right, MoveVector, Vector3.up);
         }
-        characterController.Move(MoveVector * Speed * Time.deltaTime);
+
+
     }
 
     private bool InputRight()
@@ -76,4 +76,8 @@ public class CharacterMove : MonoBehaviour
         return Input.GetKey(KeyCode.S);
     }
 
+    private void FixedUpdate()
+    {
+        GetComponent<Rigidbody>().velocity = MoveVector * Speed;
+    }
 }

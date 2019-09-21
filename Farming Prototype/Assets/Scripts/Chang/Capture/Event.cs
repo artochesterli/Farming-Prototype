@@ -86,3 +86,12 @@ public class CallSlimeActionStateChange : Event
         CurrentState = state;
     }
 }
+
+public class CallDryadActionStateChange : Event
+{
+    public DryadActionState CurrentState;
+    public CallDryadActionStateChange(DryadActionState state)
+    {
+        CurrentState = state;
+    }
+}
