@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DryadCapturable : ICapturable
-{
-    public void OnCapture()
-    {
-
-    }
-
-    public void OnHit(float Chance)
-    {
-
-    }
-}
-
 public class DryadAbility : MonoBehaviour
 {
     private float DodgeTimeCount;

@@ -3,19 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FlowerCapturable : ICapturable
-{
-    public void OnCapture()
-    {
-
-    }
-
-    public void OnHit(float Chance)
-    {
-
-    }
-}
-
 public class FlowerAbility : MonoBehaviour
 {
     

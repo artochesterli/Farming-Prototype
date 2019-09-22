@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeCapturable : ICapturable
-{
-    public void OnCapture()
-    {
-
-    }
-
-    public void OnHit(float Chance)
-    {
-
-    }
-}
-
 public class SlimeAbility : MonoBehaviour
 {
     private float GenerateTimeCount;

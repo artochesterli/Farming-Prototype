@@ -3,19 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BullCapturable : ICapturable
-{
-    public void OnCapture()
-    {
-
-    }
-
-    public void OnHit(float Chance)
-    {
-
-    }
-} 
-
 public class BullAbility : MonoBehaviour
 {
     
