@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class CaptureUtilityBase : MonoBehaviour
 {
     public CaptureUtilScriptableObject CaptureUtilData;
+    public float BoostChance { get; set; }
     protected bool _CanCapture = true;
 
     public virtual void OnOut(Vector3 EndPos) { }
@@ -16,7 +17,6 @@ public abstract class CaptureUtilityBase : MonoBehaviour
     protected virtual void OnHitTarget(ICapturable monster)
     {
         _CanCapture = false;
-        print("On Hit Target");
     }
 
     /// <summary>
@@ -26,7 +26,6 @@ public abstract class CaptureUtilityBase : MonoBehaviour
     protected virtual void OnMissTarget()
     {
         _CanCapture = false;
-        print("On Miss Target");
     }
 
     protected virtual void OnCollisionEnter(Collision other)

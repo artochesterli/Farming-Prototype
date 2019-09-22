@@ -21,8 +21,27 @@ public class CaptureBasicBall : CaptureUtilityBase
     protected override void OnHitTarget(ICapturable monster)
     {
         base.OnHitTarget(monster);
+        if (!monster.Capturable) return;
+        bool _captureSuccess = false;
+        monster.Capturable = false;
         _flyTween.Kill();
-        monster.OnHit(_cpd.CaptureChance);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(GetComponent<Rigidbody>().DOMoveY(3f, 0.5f));
+        sequence.AppendCallback(() =>
+        {
+            _captureSuccess = monster.OnHit(_cpd.CaptureChance + BoostChance);
+            if (_captureSuccess)
+            {
+                GameObject Player = GameObject.FindGameObjectWithTag("Player");
+                sequence.Append(GetComponent<Rigidbody>().DOMove(Player.transform.position, 0.5f)
+                .OnComplete(() =>
+                {
+                    Player.GetComponent<PlayerInventory>().OnEnterBag(new Item(((MonsterBase3D)monster).MonsterData.InBagSprite, (IUseable)monster));
+                    Destroy(gameObject);
+                }));
+            }
+        });
+
     }
 
     protected override void OnMissTarget()

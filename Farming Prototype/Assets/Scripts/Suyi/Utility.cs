@@ -40,6 +40,24 @@ public enum MonsterDirection
 
 public interface ICapturable
 {
-    void OnHit(float chance);
+    bool Capturable { get; set; }
+    bool OnHit(float chance);
     void OnCapture();
+}
+
+public interface IUseable
+{
+    void OnUse(PlayerController pc);
+}
+
+public class Item
+{
+    public Sprite InBagSprite;
+    public IUseable Useable;
+
+    public Item(Sprite inBagSprite, IUseable useable)
+    {
+        InBagSprite = inBagSprite;
+        Useable = useable;
+    }
 }
