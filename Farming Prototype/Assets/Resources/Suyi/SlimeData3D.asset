@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcc5cac7c31c4cd48bd3182aa2d41842, type: 3}
-  m_Name: CaptureBallData
+  m_Script: {fileID: 11500000, guid: 5cdfc35d3cecf8e4ba2dd26e9ced3139, type: 3}
+  m_Name: SlimeData3D
   m_EditorClassIdentifier: 
-  CaptureChance: 1
-  ThrowBallPower: 3
-  ThrowBallToDestinationDuration: 1
+  InBagSprite: {fileID: 21300000, guid: 3b711b94c7ec7144db84c08cae574e38, type: 3}

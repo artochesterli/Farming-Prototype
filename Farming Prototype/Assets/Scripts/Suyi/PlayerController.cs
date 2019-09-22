@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+[RequireComponent(typeof(PlayerInventory))]
 public class PlayerController : MonoBehaviour
 {
     public PlayerData PlayerData;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private FSM<PlayerController> _playerActionFSM;
     private Rigidbody _rigidBody;
     private Slider _captureSlider;
+    private PlayerInventory _inventory;
 
     private void Awake()
     {
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerActionFSM.TransitionTo<ActionIdleState>();
         _rigidBody = GetComponent<Rigidbody>();
         _captureSlider = transform.Find("UICanvas").Find("CaptureCharge").GetComponent<Slider>();
+        _inventory = GetComponent<PlayerInventory>();
     }
 
     void Update()
@@ -43,6 +46,17 @@ public class PlayerController : MonoBehaviour
         protected bool _mouseLeftClickUp { get { return Input.GetMouseButtonUp(0); } }
         protected bool _mouseRightClick { get { return Input.GetMouseButtonDown(1); } }
         protected bool _mouseRightClickUp { get { return Input.GetMouseButtonUp(1); } }
+        protected int _inventoryKeyDown
+        {
+            get
+            {
+                for (int i = 1; i <= 7; i++)
+                {
+                    if (Input.GetKeyDown(KeyCode.Alpha0 + i)) return i;
+                }
+                return 0;
+            }
+        }
         // public override void OnEnter() { print(GetType().Name); }
     }
 
@@ -120,6 +134,12 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            int ik = _inventoryKeyDown;
+            if (ik != 0)
+            {
+                Context._inventory.Items[ik - 1].Useable.OnUse(Context);
+            }
+
             if (_captureTimer < Time.time && Context.CaptureCharge >= 0f)
             {
                 Context.CaptureCharge -= Time.deltaTime * Context.PlayerData.CaptureDischargeSpeed;
@@ -169,11 +189,14 @@ public class PlayerController : MonoBehaviour
             }
             if (_throwTimer < Time.time)
             {
+
                 GameObject throwball = Instantiate(Context.PlayerData.ThrowBallPrefab, Context.transform.position, Context.PlayerData.ThrowBallPrefab.transform.rotation);
-                // throwball.GetComponent<Rigidbody>().DOJump(_hit.point, Context.PlayerData.ThrowBallPower, 1, Context.PlayerData.ThrowBallToDestinationDuration);
+                throwball.GetComponent<CaptureUtilityBase>().BoostChance = Context.CaptureCharge * 0.2f;
                 throwball.GetComponent<CaptureUtilityBase>().OnOut(_hit.point);
-                TransitionTo<ActionIdleState>();
+                Context.CaptureCharge = 0f;
+                Context._captureSlider.value = Context.CaptureCharge;
                 Context._playerMovementFSM.TransitionTo<MovementIdleState>();
+                TransitionTo<ActionIdleState>();
                 return;
             }
         }
