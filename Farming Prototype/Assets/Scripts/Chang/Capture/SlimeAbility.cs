@@ -38,10 +38,8 @@ public class SlimeAbility : MonoBehaviour
             {
                 GenerateTimeCount = 0;
                 Field = null;
-                if (CompareTag("Player"))
-                {
-                    EventManager.instance.Fire(new CallSlimeActionStateChange(SlimeActionState.Normal));
-                }
+
+                GetComponent<SlimeActionStateManager>().SetActionState(SlimeActionState.Normal);
             }
         }
     }
@@ -51,14 +49,12 @@ public class SlimeAbility : MonoBehaviour
         return Input.GetMouseButtonDown(0);
     }
 
-    private void GenerateStickyField()
+    public void GenerateStickyField()
     {
         var SlimeData = GetComponent<SlimeMonsterData>();
         Field = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Static/StickyField"), transform.position, Quaternion.Euler(0, 0, 0));
         Field.transform.localScale = new Vector3(SlimeData.FieldInitSize, 1, SlimeData.FieldInitSize);
-        if (CompareTag("Player"))
-        {
-            EventManager.instance.Fire(new CallSlimeActionStateChange(SlimeActionState.Generating));
-        }
+
+        GetComponent<SlimeActionStateManager>().SetActionState(SlimeActionState.Generating);
     }
 }

@@ -14,12 +14,12 @@ public class DryadActionStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.instance.AddHandler<CallDryadActionStateChange>(OnCallActionStateChange);
+
     }
 
     private void OnDestroy()
     {
-        EventManager.instance.RemoveHandler<CallDryadActionStateChange>(OnCallActionStateChange);
+
     }
 
     // Update is called once per frame
@@ -28,17 +28,20 @@ public class DryadActionStateManager : MonoBehaviour
         
     }
 
-    private void OnCallActionStateChange(CallDryadActionStateChange Change)
+    public void SetActionState(DryadActionState State)
     {
-        CurrentState = Change.CurrentState;
-        switch (CurrentState)
+        CurrentState = State;
+        if (CompareTag("Player"))
         {
-            case DryadActionState.Normal:
-                GetComponent<CharacterMove>().enabled = true;
-                break;
-            case DryadActionState.Dodging:
-                GetComponent<CharacterMove>().enabled = false;
-                break;
+            switch (CurrentState)
+            {
+                case DryadActionState.Normal:
+                    GetComponent<CharacterMove>().enabled = true;
+                    break;
+                case DryadActionState.Dodging:
+                    GetComponent<CharacterMove>().enabled = false;
+                    break;
+            }
         }
     }
 }

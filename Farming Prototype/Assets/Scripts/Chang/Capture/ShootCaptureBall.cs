@@ -48,7 +48,7 @@ public class ShootCaptureBall : MonoBehaviour
     {
         var CharacterActionStateManager = GetComponent<CharacterActionStateManager>();
         var CharacterMovementStateManager = GetComponent<CharacterMovementStateManager>();
-        return (CharacterActionStateManager.ActionState == CharacterActionState.Normal || CharacterActionStateManager.ActionState == CharacterActionState.Charging) &&
+        return (CharacterActionStateManager.CurrentState == CharacterActionState.Normal || CharacterActionStateManager.CurrentState == CharacterActionState.Charging) &&
             CharacterMovementStateManager.MovementState == CharacterMovementState.Normal;
     }
 
@@ -62,7 +62,7 @@ public class ShootCaptureBall : MonoBehaviour
         CaptureBallFly.Direction =  Direction;
         CaptureBallFly.MaxDis = CharacterData.CaptureBallMaximalDis;
 
-        EventManager.instance.Fire(new CallCharacterActionStateChange(CharacterActionState.ShootPreparing));
+        GetComponent<CharacterActionStateManager>().SetActionState(CharacterActionState.ShootPreparing);
     }
 
     private void PrepareShooting()
@@ -75,7 +75,7 @@ public class ShootCaptureBall : MonoBehaviour
             PreparingTimeCount = 0;
             CaptureBall.GetComponent<CaptureBallFly>().enabled = true;
             CaptureBall = null;
-            EventManager.instance.Fire(new CallCharacterActionStateChange(CharacterActionState.Normal));
+            GetComponent<CharacterActionStateManager>().SetActionState(CharacterActionState.Normal);
         }
     }
 }

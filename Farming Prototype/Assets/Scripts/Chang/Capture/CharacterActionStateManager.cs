@@ -11,16 +11,16 @@ public enum CharacterActionState
 
 public class CharacterActionStateManager : MonoBehaviour
 {
-    public CharacterActionState ActionState;
+    public CharacterActionState CurrentState;
     // Start is called before the first frame update
     void Start()
     {
-        EventManager.instance.AddHandler<CallCharacterActionStateChange>(OnCallActionStateChange);
+
     }
 
     private void OnDestroy()
     {
-        EventManager.instance.RemoveHandler<CallCharacterActionStateChange>(OnCallActionStateChange);
+
     }
 
     // Update is called once per frame
@@ -29,19 +29,21 @@ public class CharacterActionStateManager : MonoBehaviour
         
     }
 
-    private void OnCallActionStateChange(CallCharacterActionStateChange Change)
+    public void SetActionState(CharacterActionState State)
     {
-        ActionState = Change.CurrentState;
-        switch (Change.CurrentState)
+        CurrentState = State;
+        switch (CurrentState)
         {
             case CharacterActionState.Normal:
                 GetComponent<CharacterMove>().enabled = true;
                 break;
             case CharacterActionState.Charging:
                 GetComponent<CharacterMove>().enabled = false;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 break;
             case CharacterActionState.ShootPreparing:
                 GetComponent<CharacterMove>().enabled = false;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 break;
         }
     }

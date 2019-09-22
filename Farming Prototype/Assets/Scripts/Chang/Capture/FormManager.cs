@@ -6,7 +6,9 @@ public enum Form
 {
     Character,
     Slime,
-    Dryad
+    Dryad,
+    Bull,
+    Flower
 }
 
 public class FormManager : MonoBehaviour
@@ -14,6 +16,7 @@ public class FormManager : MonoBehaviour
     public Form CurrentForm;
 
     private List<Component> TemporaryMonsterComponents;
+    private Collider TemporaryCollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,10 @@ public class FormManager : MonoBehaviour
     void Update()
     {
         CheckInput();
+        if (GetComponent<MeshCollider>())
+        {
+            GetComponent<MeshCollider>().convex = true;
+        }
     }
 
     private void CheckInput()
@@ -51,6 +58,30 @@ public class FormManager : MonoBehaviour
                 SwtichToDryad();
             }
         }
+
+        if (InputBull())
+        {
+            if(CurrentForm == Form.Bull)
+            {
+                BackToCharacter();
+            }
+            else
+            {
+                SwtichToBull();
+            }
+        }
+
+        if (InputFlower())
+        {
+            if (CurrentForm == Form.Flower)
+            {
+                BackToCharacter();
+            }
+            else
+            {
+                SwtichToFlower();
+            }
+        }
     }
 
 
@@ -65,11 +96,22 @@ public class FormManager : MonoBehaviour
         return Input.GetKeyDown(KeyCode.Alpha2);
     }
 
+    private bool InputBull()
+    {
+        return Input.GetKeyDown(KeyCode.Alpha3);
+    }
+
+    private bool InputFlower()
+    {
+        return Input.GetKeyDown(KeyCode.Alpha4);
+    }
+
     private void BackToCharacter()
     {
         CurrentForm = Form.Character;
 
         ClearTempComponents();
+        ClearTemporaryCollider();
         ActivateCharacter();
 
         GetComponent<MeshFilter>().mesh = Resources.Load("Chang/Models/Character", typeof(Mesh)) as Mesh;
@@ -85,6 +127,7 @@ public class FormManager : MonoBehaviour
         CurrentForm = Form.Slime;
 
         ClearTempComponents();
+        ClearTemporaryCollider();
 
         gameObject.AddComponent<SlimeMonsterData>();
         gameObject.AddComponent<SlimeAbility>();
@@ -98,6 +141,15 @@ public class FormManager : MonoBehaviour
 
         DeactivateCharacter();
 
+        GameObject temp = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Creatures/Slime"));
+
+        Mesh mesh = temp.GetComponent<MeshCollider>().sharedMesh;
+        gameObject.AddComponent<MeshCollider>();
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GetComponent<MeshCollider>().convex = true;
+        TemporaryCollider = GetComponent<MeshCollider>();
+
+        Destroy(temp);
 
         var SlimeData = GetComponent<SlimeMonsterData>();
         EventManager.instance.Fire(new CallSetCharacterSpeed(SlimeData.NormalSpeed, SlimeData.StickySlowDownSpeed));
@@ -108,6 +160,7 @@ public class FormManager : MonoBehaviour
         CurrentForm = Form.Dryad;
 
         ClearTempComponents();
+        ClearTemporaryCollider();
 
         gameObject.AddComponent<DryadData>();
         gameObject.AddComponent<DryadAbility>();
@@ -120,21 +173,96 @@ public class FormManager : MonoBehaviour
         GetComponent<Renderer>().material = Resources.Load("Chang/Material/Dryad", typeof(Material)) as Material;
 
         DeactivateCharacter();
+        GetComponent<BoxCollider>().enabled = true;
 
         var DryadData = GetComponent<DryadData>();
         EventManager.instance.Fire(new CallSetCharacterSpeed(DryadData.NormalSpeed, DryadData.StickySlowDownSpeed));
+    }
+
+    private void SwtichToBull()
+    {
+        CurrentForm = Form.Bull;
+
+        ClearTempComponents();
+        ClearTemporaryCollider();
+
+        gameObject.AddComponent<BullData>();
+        gameObject.AddComponent<BullAbility>();
+        gameObject.AddComponent<BullActionStateManager>();
+        TemporaryMonsterComponents.Add(GetComponent<BullData>());
+        TemporaryMonsterComponents.Add(GetComponent<BullAbility>());
+        TemporaryMonsterComponents.Add(GetComponent<BullActionStateManager>());
+
+        GetComponent<MeshFilter>().mesh = Resources.Load("Chang/Models/Bull", typeof(Mesh)) as Mesh;
+        GetComponent<Renderer>().material = Resources.Load("Chang/Material/Bull", typeof(Material)) as Material;
+
+        DeactivateCharacter();
+
+        GameObject temp = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Creatures/Bull"));
+
+        Mesh mesh = temp.GetComponent<MeshCollider>().sharedMesh;
+        gameObject.AddComponent<MeshCollider>();
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GetComponent<MeshCollider>().convex = true;
+        TemporaryCollider = GetComponent<MeshCollider>();
+
+        Destroy(temp);
+
+        var BullData = GetComponent<BullData>();
+        EventManager.instance.Fire(new CallSetCharacterSpeed(BullData.NormalSpeed, BullData.StickySlowDownSpeed));
+    }
+
+    private void SwtichToFlower()
+    {
+        CurrentForm = Form.Flower;
+
+        ClearTempComponents();
+        ClearTemporaryCollider();
+
+        gameObject.AddComponent<FlowerData>();
+        gameObject.AddComponent<FlowerAbility>();
+        gameObject.AddComponent<FlowerActionStateManager>();
+        TemporaryMonsterComponents.Add(GetComponent<FlowerData>());
+        TemporaryMonsterComponents.Add(GetComponent<FlowerAbility>());
+        TemporaryMonsterComponents.Add(GetComponent<FlowerActionStateManager>());
+
+        GetComponent<MeshFilter>().mesh = Resources.Load("Chang/Models/Flower", typeof(Mesh)) as Mesh;
+        GetComponent<Renderer>().material = Resources.Load("Chang/Material/WaterBlue", typeof(Material)) as Material;
+
+        DeactivateCharacter();
+
+        GameObject temp = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Creatures/Flower"));
+
+        Mesh mesh = temp.GetComponent<MeshCollider>().sharedMesh;
+        gameObject.AddComponent<MeshCollider>();
+        GetComponent<MeshCollider>().sharedMesh = mesh;
+        GetComponent<MeshCollider>().convex = true;
+        TemporaryCollider = GetComponent<MeshCollider>();
+
+        Destroy(temp);
+
+        GetComponent<FlowerAbility>().PushFieldCanvas = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Static/PushFieldCanvas"));
+        GetComponent<FlowerAbility>().PushFieldCanvas.transform.position = transform.position;
+        GetComponent<FlowerAbility>().PushFieldCanvas.transform.parent = transform;
+        GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<RectTransform>().localRotation= Quaternion.Euler(90, 0, 0);
+        GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
+
+        var FlowerData = GetComponent<FlowerData>();
+        EventManager.instance.Fire(new CallSetCharacterSpeed(FlowerData.NormalSpeed, FlowerData.StickySlowDownSpeed));
     }
 
     private void ActivateCharacter()
     {
         GetComponent<CharacterActionStateManager>().enabled = true;
         GetComponent<ShootCaptureBall>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     private void DeactivateCharacter()
     {
         GetComponent<CharacterActionStateManager>().enabled = false;
         GetComponent<ShootCaptureBall>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
     }
 
     private void ClearTempComponents()
@@ -144,5 +272,11 @@ public class FormManager : MonoBehaviour
             Destroy(TemporaryMonsterComponents[i]);
         }
         TemporaryMonsterComponents.Clear();
+    }
+
+    private void ClearTemporaryCollider()
+    {
+        Destroy(TemporaryCollider);
+        TemporaryCollider = null;
     }
 }

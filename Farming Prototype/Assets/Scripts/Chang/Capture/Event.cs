@@ -49,15 +49,6 @@ public class VitalityChange : Event
     }
 }
 
-public class CallCharacterActionStateChange : Event
-{
-    public CharacterActionState CurrentState;
-    public CallCharacterActionStateChange(CharacterActionState state)
-    {
-        CurrentState = state;
-    }
-}
-
 public class CallCharacterMovementStateChange : Event
 {
     public CharacterMovementState CurrentState;
@@ -78,20 +69,3 @@ public class CallSetCharacterSpeed : Event
     }
 }
 
-public class CallSlimeActionStateChange : Event
-{
-    public SlimeActionState CurrentState;
-    public CallSlimeActionStateChange(SlimeActionState state)
-    {
-        CurrentState = state;
-    }
-}
-
-public class CallDryadActionStateChange : Event
-{
-    public DryadActionState CurrentState;
-    public CallDryadActionStateChange(DryadActionState state)
-    {
-        CurrentState = state;
-    }
-}

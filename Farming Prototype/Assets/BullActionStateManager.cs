@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SlimeActionState
+public enum BullActionState
 {
     Normal,
-    Generating
+    Charging
 }
 
-public class SlimeActionStateManager : MonoBehaviour
+public class BullActionStateManager : MonoBehaviour
 {
-    public SlimeActionState CurrentState;
+    public BullActionState CurrentState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,22 +29,20 @@ public class SlimeActionStateManager : MonoBehaviour
         
     }
 
-    public void SetActionState(SlimeActionState State)
+    public void SetActionState(BullActionState State)
     {
         CurrentState = State;
         if (CompareTag("Player"))
         {
             switch (CurrentState)
             {
-                case SlimeActionState.Normal:
+                case BullActionState.Normal:
                     GetComponent<CharacterMove>().enabled = true;
                     break;
-                case SlimeActionState.Generating:
+                case BullActionState.Charging:
                     GetComponent<CharacterMove>().enabled = false;
                     break;
             }
         }
     }
-
-    
 }

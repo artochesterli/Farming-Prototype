@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public enum SlimeActionState
+public enum FlowerActionState
 {
     Normal,
-    Generating
+    Blowing
 }
 
-public class SlimeActionStateManager : MonoBehaviour
+public class FlowerActionStateManager : MonoBehaviour
 {
-    public SlimeActionState CurrentState;
+    public FlowerActionState CurrentState;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -28,22 +30,20 @@ public class SlimeActionStateManager : MonoBehaviour
         
     }
 
-    public void SetActionState(SlimeActionState State)
+    public void SetActionState(FlowerActionState State)
     {
         CurrentState = State;
         if (CompareTag("Player"))
         {
             switch (CurrentState)
             {
-                case SlimeActionState.Normal:
+                case FlowerActionState.Normal:
                     GetComponent<CharacterMove>().enabled = true;
                     break;
-                case SlimeActionState.Generating:
+                case FlowerActionState.Blowing:
                     GetComponent<CharacterMove>().enabled = false;
                     break;
             }
         }
     }
-
-    
 }

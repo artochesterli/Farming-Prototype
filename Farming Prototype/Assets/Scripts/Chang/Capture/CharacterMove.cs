@@ -6,7 +6,7 @@ public class CharacterMove : MonoBehaviour
 {
     public float Speed;
 
-    private Vector3 MoveVector;
+    public Vector3 MoveVector;
     // Start is called before the first frame update
     void Start()
     {
