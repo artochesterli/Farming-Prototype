@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class SlimeCapturable : ICapturable
+{
+    public void OnCapture()
+    {
+
+    }
+
+    public void OnHit(float Chance)
+    {
+
+    }
+}
+
 public class SlimeAbility : MonoBehaviour
 {
     private float GenerateTimeCount;
@@ -36,10 +49,7 @@ public class SlimeAbility : MonoBehaviour
             Field.transform.localScale = Vector3.Lerp(new Vector3(SlimeData.FieldInitSize, 1, SlimeData.FieldInitSize), new Vector3(SlimeData.FieldMaxSize, 1, SlimeData.FieldMaxSize), GenerateTimeCount / SlimeData.FieldGenerationTime);
             if (GenerateTimeCount >= SlimeData.FieldGenerationTime)
             {
-                GenerateTimeCount = 0;
-                Field = null;
-
-                GetComponent<SlimeActionStateManager>().SetActionState(SlimeActionState.Normal);
+                StopGenerating();
             }
         }
     }
@@ -56,5 +66,13 @@ public class SlimeAbility : MonoBehaviour
         Field.transform.localScale = new Vector3(SlimeData.FieldInitSize, 1, SlimeData.FieldInitSize);
 
         GetComponent<SlimeActionStateManager>().SetActionState(SlimeActionState.Generating);
+        GetComponent<SpeedManager>().SelfSpeedDirection = Vector3.zero;
+    }
+
+    public void StopGenerating()
+    {
+        GenerateTimeCount = 0;
+        Field = null;
+        GetComponent<SlimeActionStateManager>().SetActionState(SlimeActionState.Normal);
     }
 }

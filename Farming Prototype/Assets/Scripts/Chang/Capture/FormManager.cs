@@ -119,7 +119,8 @@ public class FormManager : MonoBehaviour
 
 
         var CharacterData = GetComponent<CharacterData>();
-        EventManager.instance.Fire(new CallSetCharacterSpeed(CharacterData.NormalSpeed, CharacterData.StickySlowDownSpeed));
+        GetComponent<SpeedManager>().SetSpeedData(CharacterData.NormalSpeed, CharacterData.StickySlowDownSpeed, CharacterData.PushSpeed);
+
     }
 
     private void SwtichToSlime()
@@ -152,7 +153,7 @@ public class FormManager : MonoBehaviour
         Destroy(temp);
 
         var SlimeData = GetComponent<SlimeMonsterData>();
-        EventManager.instance.Fire(new CallSetCharacterSpeed(SlimeData.NormalSpeed, SlimeData.StickySlowDownSpeed));
+        GetComponent<SpeedManager>().SetSpeedData(SlimeData.NormalSpeed, SlimeData.StickySlowDownSpeed, SlimeData.PushSpeed);
     }
 
     private void SwtichToDryad()
@@ -176,7 +177,7 @@ public class FormManager : MonoBehaviour
         GetComponent<BoxCollider>().enabled = true;
 
         var DryadData = GetComponent<DryadData>();
-        EventManager.instance.Fire(new CallSetCharacterSpeed(DryadData.NormalSpeed, DryadData.StickySlowDownSpeed));
+        GetComponent<SpeedManager>().SetSpeedData(DryadData.NormalSpeed, DryadData.StickySlowDownSpeed, DryadData.PushSpeed);
     }
 
     private void SwtichToBull()
@@ -209,7 +210,7 @@ public class FormManager : MonoBehaviour
         Destroy(temp);
 
         var BullData = GetComponent<BullData>();
-        EventManager.instance.Fire(new CallSetCharacterSpeed(BullData.NormalSpeed, BullData.StickySlowDownSpeed));
+        GetComponent<SpeedManager>().SetSpeedData(BullData.NormalSpeed, BullData.StickySlowDownSpeed, BullData.PushSpeed);
     }
 
     private void SwtichToFlower()
@@ -248,7 +249,7 @@ public class FormManager : MonoBehaviour
         GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
 
         var FlowerData = GetComponent<FlowerData>();
-        EventManager.instance.Fire(new CallSetCharacterSpeed(FlowerData.NormalSpeed, FlowerData.StickySlowDownSpeed));
+        GetComponent<SpeedManager>().SetSpeedData(FlowerData.NormalSpeed, FlowerData.StickySlowDownSpeed, FlowerData.PushSpeed);
     }
 
     private void ActivateCharacter()

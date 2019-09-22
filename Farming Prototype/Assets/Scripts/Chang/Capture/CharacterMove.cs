@@ -48,11 +48,14 @@ public class CharacterMove : MonoBehaviour
             HaveInput = true;
             MoveVector += Vector3.back;
         }
+
+
         if (HaveInput)
         {
             transform.eulerAngles = Vector3.up * Vector3.SignedAngle(Vector3.right, MoveVector, Vector3.up);
         }
 
+        GetComponent<SpeedManager>().SelfSpeedDirection = MoveVector.normalized;
 
     }
 
@@ -74,10 +77,5 @@ public class CharacterMove : MonoBehaviour
     private bool InputBack()
     {
         return Input.GetKey(KeyCode.S);
-    }
-
-    private void FixedUpdate()
-    {
-        GetComponent<Rigidbody>().velocity = MoveVector * Speed;
     }
 }

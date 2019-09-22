@@ -6,6 +6,7 @@ public class BullData : MonoBehaviour
 {
     public float NormalSpeed = 6;
     public float StickySlowDownSpeed = 3;
+    public float PushSpeed = 8;
 
     public float ChargeSpeed = 12;
     public float ChargeDirectionTurnSpeed = 90;
@@ -14,7 +15,10 @@ public class BullData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!CompareTag("Player"))
+        {
+            GetComponent<SpeedManager>().SetSpeedData(NormalSpeed, StickySlowDownSpeed, PushSpeed);
+        }
     }
 
     // Update is called once per frame

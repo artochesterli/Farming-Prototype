@@ -6,6 +6,7 @@ public class CharacterData : MonoBehaviour
 {
     public float NormalSpeed;
     public float StickySlowDownSpeed;
+    public float PushSpeed;
     public float EnergyChargeSpeed;
     public float EnergyDissipateSpeed;
     public float EnergyHoldTime;
@@ -18,7 +19,7 @@ public class CharacterData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetComponent<SpeedManager>().SetSpeedData(NormalSpeed, StickySlowDownSpeed, PushSpeed);
     }
 
     // Update is called once per frame

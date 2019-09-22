@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DetectStickyFied : MonoBehaviour
+public class DetectStickyField : MonoBehaviour
 {
+    public bool InStickyField;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class DetectStickyFied : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StickyField"))
         {
-            EventManager.instance.Fire(new CallCharacterMovementStateChange(CharacterMovementState.StickySlowDown));
+            InStickyField = true;
         }
     }
 
@@ -28,7 +30,9 @@ public class DetectStickyFied : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StickyField"))
         {
-            EventManager.instance.Fire(new CallCharacterMovementStateChange(CharacterMovementState.Normal));
+            InStickyField = false;
         }
     }
+
+
 }

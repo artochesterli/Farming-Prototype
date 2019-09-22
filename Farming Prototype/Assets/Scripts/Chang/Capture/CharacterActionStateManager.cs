@@ -39,11 +39,11 @@ public class CharacterActionStateManager : MonoBehaviour
                 break;
             case CharacterActionState.Charging:
                 GetComponent<CharacterMove>().enabled = false;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GetComponent<SpeedManager>().SelfSpeedDirection = Vector3.zero;
                 break;
             case CharacterActionState.ShootPreparing:
                 GetComponent<CharacterMove>().enabled = false;
-                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GetComponent<SpeedManager>().SelfSpeedDirection = Vector3.zero;
                 break;
         }
     }

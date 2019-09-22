@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 6168586563501146710}
   - component: {fileID: 9057211510445765366}
   - component: {fileID: 7835429123881999750}
+  - component: {fileID: -3542527446620947739}
+  - component: {fileID: 4929737377541301681}
+  - component: {fileID: -3451074993901521783}
   m_Layer: 0
   m_Name: Bull
   m_TagString: Untagged
@@ -127,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalSpeed: 6
   StickySlowDownSpeed: 3
+  PushSpeed: 8
   ChargeSpeed: 12
   ChargeDirectionTurnSpeed: 90
   ChargeCoolDown: 5
@@ -155,3 +159,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 0
+--- !u!114 &-3542527446620947739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916611327470998772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e8404af831fa448ad26f80ec02141e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelfSpeed: {x: 0, y: 0, z: 0}
+  ForcedSpeed: {x: 0, y: 0, z: 0}
+  SelfSpeedDirection: {x: 0, y: 0, z: 0}
+  CurrentNormalSpeed: 0
+  CurrentStickySlowDownSpeed: 0
+  CurrentPushFieldSpeed: 0
+--- !u!114 &4929737377541301681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916611327470998772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf5c7bf3a5dc9142865ee0192ef3b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InStickyField: 0
+--- !u!114 &-3451074993901521783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7916611327470998772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422bfda7c4935b64dbf31a54d5c9ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InPushField: 0
+  Direction: {x: 0, y: 0, z: 0}

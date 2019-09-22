@@ -49,23 +49,3 @@ public class VitalityChange : Event
     }
 }
 
-public class CallCharacterMovementStateChange : Event
-{
-    public CharacterMovementState CurrentState;
-    public CallCharacterMovementStateChange(CharacterMovementState state)
-    {
-        CurrentState = state;
-    }
-}
-
-public class CallSetCharacterSpeed : Event
-{
-    public float NormalSpeed;
-    public float StickySlowDownSpeed;
-    public CallSetCharacterSpeed(float normalSpeed,float stickySlowDownSpeed)
-    {
-        NormalSpeed = normalSpeed;
-        StickySlowDownSpeed = stickySlowDownSpeed;
-    }
-}
-

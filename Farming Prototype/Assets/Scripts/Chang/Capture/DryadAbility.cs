@@ -2,11 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class DryadCapturable : ICapturable
+{
+    public void OnCapture()
+    {
+
+    }
+
+    public void OnHit(float Chance)
+    {
+
+    }
+}
+
 public class DryadAbility : MonoBehaviour
 {
     private float DodgeTimeCount;
     private int ThornCount;
-    private Vector3 Direction;
+    public Vector3 Direction;
     private Vector3 StartPos;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +34,11 @@ public class DryadAbility : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        Dodging();
+    }
+
     private void CheckInput()
     {
         if(InputAvailable()&& CompareTag("Player") && GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Normal)
@@ -33,9 +51,7 @@ public class DryadAbility : MonoBehaviour
                 Direction.Normalize();
             }*/
 
-            Direction = transform.rotation * Vector3.right;
-
-            StartDodge();
+            StartDodge(transform.rotation * Vector3.right);
         }
     }
 
@@ -44,15 +60,32 @@ public class DryadAbility : MonoBehaviour
         return Input.GetMouseButtonDown(0);
     }
 
-    public void StartDodge()
+    public void StartDodge(Vector3 Dir)
     {
+        Direction = Dir;
+        transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.right, Direction, Vector3.up), 0);
         var DryadData = GetComponent<DryadData>();
         float Speed = DryadData.DodgeDis / DryadData.DodgeTime;
-        GetComponent<Rigidbody>().velocity = Direction * Speed;
+        GetComponent<SpeedManager>().CurrentNormalSpeed = Speed;
+        GetComponent<SpeedManager>().SelfSpeedDirection = Direction;
+
         StartPos = transform.position;
 
         GetComponent<DryadActionStateManager>().SetActionState(DryadActionState.Dodging);
     }
+
+    public void StopDodge()
+    {
+        var DryadData = GetComponent<DryadData>();
+
+        DodgeTimeCount = 0;
+        ThornCount = 0;
+
+        GetComponent<SpeedManager>().CurrentNormalSpeed = DryadData.NormalSpeed;
+
+        GetComponent<DryadActionStateManager>().SetActionState(DryadActionState.Normal);
+    }
+
 
     private void Dodging()
     {
@@ -63,9 +96,9 @@ public class DryadAbility : MonoBehaviour
 
         if (GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Dodging)
         {
-            if (GetComponent<CharacterMovementStateManager>().MovementState == CharacterMovementState.StickySlowDown)
+            if (GetComponent<DetectStickyField>().InStickyField)
             {
-                ResetDodge();
+                StopDodge();
             }
 
             DodgeTimeCount += Time.deltaTime;
@@ -76,7 +109,7 @@ public class DryadAbility : MonoBehaviour
             }
             if (DodgeTimeCount >= DryadData.DodgeTime)
             {
-                ResetDodge();
+                StopDodge();
             }
         }
     }
@@ -85,21 +118,9 @@ public class DryadAbility : MonoBehaviour
     {
         if(GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Dodging)
         {
-            ResetDodge();
+            StopDodge();
         }
     }
 
-    private void ResetDodge()
-    {
-        DodgeTimeCount = 0;
-        ThornCount = 0;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-
-        GetComponent<DryadActionStateManager>().SetActionState(DryadActionState.Normal);
-    }
-
-    private void FixedUpdate()
-    {
-        Dodging();
-    }
+    
 }

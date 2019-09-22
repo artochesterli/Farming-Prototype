@@ -16,6 +16,11 @@ GameObject:
   - component: {fileID: 5030355493944065319}
   - component: {fileID: -595848923437947373}
   - component: {fileID: 64680081671924919}
+  - component: {fileID: -8211750077876209461}
+  - component: {fileID: -7899511784561528749}
+  - component: {fileID: 7249956176424948342}
+  - component: {fileID: -8776968920806254303}
+  - component: {fileID: 4068596527487716132}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -136,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalSpeed: 6
   StickySlowDownSpeed: 6
+  PushSpeed: 6
   FieldInitSize: 1
   FieldMaxSize: 4
   FieldGenerationTime: 2
@@ -156,3 +162,75 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &-8211750077876209461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521353176477866717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e8404af831fa448ad26f80ec02141e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelfSpeed: {x: 0, y: 0, z: 0}
+  ForcedSpeed: {x: 0, y: 0, z: 0}
+  SelfSpeedDirection: {x: 0, y: 0, z: 0}
+  CurrentNormalSpeed: 0
+  CurrentStickySlowDownSpeed: 0
+  CurrentPushFieldSpeed: 0
+--- !u!114 &-7899511784561528749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521353176477866717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf5c7bf3a5dc9142865ee0192ef3b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InStickyField: 0
+--- !u!114 &7249956176424948342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521353176477866717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422bfda7c4935b64dbf31a54d5c9ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InPushField: 0
+  Direction: {x: 0, y: 0, z: 0}
+--- !u!114 &-8776968920806254303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521353176477866717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149fcd09f31480f41bc1aaaa4a5b6a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4068596527487716132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521353176477866717}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305c70f4dd886824ebe1a60c15af9796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StayTimeMinMax: {x: 2, y: 4}
+  WanderRadius: 4
+  Center: {x: 0, y: 0, z: 0}

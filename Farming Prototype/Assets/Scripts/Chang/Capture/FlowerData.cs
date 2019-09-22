@@ -6,6 +6,7 @@ public class FlowerData : MonoBehaviour
 {
     public float NormalSpeed = 0;
     public float StickySlowDownSpeed = 0;
+    public float PushSpeed = 0;
 
     public float PushFieldRadius = 6.5f;
     public float PushFieldAngle = 90;

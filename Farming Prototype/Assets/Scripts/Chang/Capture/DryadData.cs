@@ -6,6 +6,7 @@ public class DryadData : MonoBehaviour
 {
     public float NormalSpeed = 12;
     public float StickySlowDownSpeed = 1;
+    public float PushSpeed = 12;
 
     public float DodgeDis = 6;
     public float DodgeTime = 0.2f;
@@ -16,7 +17,10 @@ public class DryadData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!CompareTag("Player"))
+        {
+            GetComponent<SpeedManager>().SetSpeedData(NormalSpeed, StickySlowDownSpeed, PushSpeed);
+        }
     }
 
     // Update is called once per frame

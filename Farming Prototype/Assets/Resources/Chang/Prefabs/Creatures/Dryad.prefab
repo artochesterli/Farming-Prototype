@@ -16,6 +16,12 @@ GameObject:
   - component: {fileID: 4588507955656165350}
   - component: {fileID: -7788381314201078247}
   - component: {fileID: 8669770705536959245}
+  - component: {fileID: 8052520991869381981}
+  - component: {fileID: 4749521729318936830}
+  - component: {fileID: -7668266055182990721}
+  - component: {fileID: -4857533803969652477}
+  - component: {fileID: 1638772455088514245}
+  - component: {fileID: -506251039790541488}
   m_Layer: 0
   m_Name: Dryad
   m_TagString: Untagged
@@ -30,7 +36,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206842011680915241}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -126,11 +132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalSpeed: 12
   StickySlowDownSpeed: 2
+  PushSpeed: 12
   DodgeDis: 6
   DodgeTime: 0.2
   DodgeCoolDown: 2
   ThornNumber: 3
-  ThornSize: 1
 --- !u!114 &-7788381314201078247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dd0ba1b1df6f3a48975cbca18359ff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Direction: {x: 0, y: 0, z: 0}
 --- !u!114 &8669770705536959245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,3 +163,98 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 0
+--- !u!114 &8052520991869381981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422bfda7c4935b64dbf31a54d5c9ebbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InPushField: 0
+  Direction: {x: 0, y: 0, z: 0}
+--- !u!114 &4749521729318936830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddf5c7bf3a5dc9142865ee0192ef3b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InStickyField: 0
+--- !u!114 &-7668266055182990721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e8404af831fa448ad26f80ec02141e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelfSpeed: {x: 0, y: 0, z: 0}
+  ForcedSpeed: {x: 0, y: 0, z: 0}
+  SelfSpeedDirection: {x: 0, y: 0, z: 0}
+  CurrentNormalSpeed: 0
+  CurrentStickySlowDownSpeed: 0
+  CurrentPushFieldSpeed: 0
+--- !u!114 &-4857533803969652477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ff1a3b96bd26544a5a497ac7a8863d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FleeDir: {x: 0, y: 0, z: 0}
+--- !u!114 &1638772455088514245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b3c49499b79fde4b8cdd092ec49c3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlertDis: 12
+  ResponseDis: 6
+  SaveDis: 20
+  SaveDetectAngle: 180
+  InDangerDetectAngle: 360
+  IgnoredForms: 0100000004000000
+  DetectedPlayer: {fileID: 0}
+  DetectedBall: {fileID: 0}
+  CastHeight: 1
+  CastInterval: 5
+--- !u!114 &-506251039790541488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206842011680915241}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305c70f4dd886824ebe1a60c15af9796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StayTimeMinMax: {x: 3, y: 5}
+  WanderRadius: 8
+  Center: {x: 0, y: 0, z: 0}

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - StickyField
   - Capturable
+  - CaptureBall
   layers:
   - Default
   - TransparentFX

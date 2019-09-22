@@ -47,9 +47,8 @@ public class ShootCaptureBall : MonoBehaviour
     private bool StateAvailable()
     {
         var CharacterActionStateManager = GetComponent<CharacterActionStateManager>();
-        var CharacterMovementStateManager = GetComponent<CharacterMovementStateManager>();
         return (CharacterActionStateManager.CurrentState == CharacterActionState.Normal || CharacterActionStateManager.CurrentState == CharacterActionState.Charging) &&
-            CharacterMovementStateManager.MovementState == CharacterMovementState.Normal;
+            !GetComponent<DetectStickyField>().InStickyField && !GetComponent<DetectPushField>().InPushField;
     }
 
     private void GenerateCaptureBall()
