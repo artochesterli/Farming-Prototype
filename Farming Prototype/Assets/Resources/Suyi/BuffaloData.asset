@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711a202cb6d95354486fdc5582b57d96, type: 3}
+  m_Name: BuffaloData
+  m_EditorClassIdentifier: 
+  InBagSprite: {fileID: 21300000, guid: 948f847403eab184c86ac53ae05881f1, type: 3}
+  MovingSpeed: 2
+  IdleMinDuration: 0.5
+  IdleMaxDuration: 2
+  IdleMoveMinDuration: 0.5
+  IdleMoveMaxDuration: 1
+  Sights:
+  - Radius: 6
+    Angle: 360
+    AngleOffset: 0
+  CaptureChance: 1
+  StareMinDuration: 1
+  StareMaxDuration: 2
+  ChargeSpeed: 20
+  TurnTendency: 50
+  OverChargeTime: 0.5
+  PushForce: 20
+  PushDuration: 0.5

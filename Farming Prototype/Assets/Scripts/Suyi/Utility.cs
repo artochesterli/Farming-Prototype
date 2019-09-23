@@ -61,3 +61,19 @@ public class Item
         Useable = useable;
     }
 }
+
+public abstract class Impact { }
+
+public class KnockOff : Impact
+{
+    public Vector3 Direction;
+    public float Force;
+    public float Duration;
+
+    public KnockOff(Vector3 direction, float force, float duration)
+    {
+        Direction = direction;
+        Force = force;
+        Duration = duration;
+    }
+}

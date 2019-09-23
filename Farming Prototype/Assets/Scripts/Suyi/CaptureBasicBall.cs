@@ -40,6 +40,10 @@ public class CaptureBasicBall : CaptureUtilityBase
                     Destroy(gameObject);
                 }));
             }
+            else
+            {
+                monster.Capturable = true;
+            }
         });
 
     }

@@ -38,6 +38,20 @@ public class PlayerController : MonoBehaviour
         _playerActionFSM.FixedUpdate();
     }
 
+    public void OnImpact(KnockOff impact)
+    {
+        if (_playerMovementFSM.CurrentState.GetType().Equals(typeof(MovementKnockOffState))) return;
+        _playerMovementFSM.TransitionTo<MovementKnockOffState>();
+        Sequence seq = DOTween.Sequence();
+        Vector3 _finalPos = transform.position + impact.Direction * impact.Force;
+        _finalPos.y = transform.position.y;
+        seq.Append(transform.DOMove(_finalPos, impact.Duration));
+        seq.AppendCallback(() =>
+        {
+            _playerMovementFSM.TransitionTo<MovementIdleState>();
+        });
+    }
+
     private abstract class PlayerState : FSM<PlayerController>.State
     {
         protected float _horizontalAxis { get { return Input.GetAxis("Horizontal"); } }
@@ -105,6 +119,10 @@ public class PlayerController : MonoBehaviour
     }
 
     private class MovementThrowBallState : PlayerMovementState { }
+
+    private class MovementKnockOffState : PlayerMovementState
+    {
+    }
 
     private class ActionIdleState : PlayerActionState
     {
