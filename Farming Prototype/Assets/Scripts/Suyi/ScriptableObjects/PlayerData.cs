@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "FarmingPrototype/PlayerData", order = 1)]
 public class PlayerData : ScriptableObject
 {
+    public Mesh PlayerMesh;
+    public Material PlayerMaterial;
     public float MovingSpeed;
     public float RotationSpeed;
     public float CaptureChargeSpeed = 2f;

@@ -52,6 +52,33 @@ public class PlayerController : MonoBehaviour
         });
     }
 
+    public void OnTransform<T>(MonsterBaseScriptableObject3D _data) where T : MonsterBase3D
+    {
+        foreach (var d in GetComponents<MonsterBase3D>())
+        {
+            Destroy(d);
+        }
+        gameObject.AddComponent<T>();
+        GetComponent<T>().MonsterData = _data;
+        GetComponent<T>().ControllableSetup();
+        GetComponent<MeshFilter>().mesh = _data.MonsterMesh;
+        GetComponent<Renderer>().material = _data.MonsterMaterial;
+        _playerMovementFSM.TransitionTo<TransformMovementState>();
+        _playerActionFSM.TransitionTo<TransformActionState>();
+    }
+
+    public void OnTransformBack()
+    {
+        foreach (var d in GetComponents<MonsterBase3D>())
+        {
+            Destroy(d);
+        }
+        GetComponent<MeshFilter>().mesh = PlayerData.PlayerMesh;
+        GetComponent<Renderer>().material = PlayerData.PlayerMaterial;
+        _playerMovementFSM.TransitionTo<MovementIdleState>();
+        _playerActionFSM.TransitionTo<ActionIdleState>();
+    }
+
     private abstract class PlayerState : FSM<PlayerController>.State
     {
         protected float _horizontalAxis { get { return Input.GetAxis("Horizontal"); } }
@@ -74,8 +101,20 @@ public class PlayerController : MonoBehaviour
         // public override void OnEnter() { print(GetType().Name); }
     }
 
-    private abstract class TransformMovementState : PlayerState { }
-    private abstract class TransformActionState : PlayerState { }
+    private class TransformMovementState : PlayerState { }
+    private class TransformActionState : PlayerState
+    {
+        public override void Update()
+        {
+            base.Update();
+            int ik = _inventoryKeyDown;
+            if (ik != 0)
+            {
+                if (Context._inventory.Items.Count > ik - 1)
+                    Context._inventory.Items[ik - 1].MonsterTransform.OnUnUse();
+            }
+        }
+    }
 
     private abstract class PlayerMovementState : PlayerState { }
 

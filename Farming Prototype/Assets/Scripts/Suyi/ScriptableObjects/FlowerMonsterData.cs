@@ -11,4 +11,5 @@ public class FlowerMonsterData : MonsterBaseScriptableObject3D
     public float PushForce = 20f;
     public float PushDuration = 0.5f;
     public float ResetTime = 2f;
+    public GameObject PushFieldPrefab;
 }

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dee2bec82226fd4bb536f3f32d29e9e, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
+  PlayerMesh: {fileID: 6622264641530768373, guid: a7bafe522b4dca543a0a4b116242ba83,
+    type: 3}
+  PlayerMaterial: {fileID: 2100000, guid: cc510bb5ee851354b8f24f96f6f1864c, type: 2}
   MovingSpeed: 6
   RotationSpeed: 10
   CaptureChargeSpeed: 0.5

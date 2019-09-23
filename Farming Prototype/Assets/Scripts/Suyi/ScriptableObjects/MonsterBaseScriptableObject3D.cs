@@ -5,6 +5,8 @@ using UnityEngine;
 public abstract class MonsterBaseScriptableObject3D : ScriptableObject
 {
     public Sprite InBagSprite;
+    public Mesh MonsterMesh;
+    public Material MonsterMaterial;
     public float MovingSpeed = 1f;
     public float IdleMinDuration = 0.5f;
     public float IdleMaxDuration = 4f;
@@ -17,4 +19,5 @@ public abstract class MonsterBaseScriptableObject3D : ScriptableObject
 	public List<Sight> Sights;
     [Range(0f, 1f)]
     public float CaptureChance = 0.2f;
+    public LayerMask Ground;
 }

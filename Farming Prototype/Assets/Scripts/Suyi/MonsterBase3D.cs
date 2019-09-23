@@ -37,6 +37,10 @@ public abstract class MonsterBase3D : MonoBehaviour, ICapturable
         return false;
     }
 
+    public virtual void ControllableSetup()
+    {
+    }
+
     /// <summary>
     /// 
     /// </summary>

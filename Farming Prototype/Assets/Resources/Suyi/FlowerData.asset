@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: FlowerData
   m_EditorClassIdentifier: 
   InBagSprite: {fileID: 21300000, guid: 32739d472bcf7ff49a7df0bff5a97672, type: 3}
+  MonsterMesh: {fileID: 5691666353457927829, guid: ea250e9602aefdc41b8daf8a68bfa916,
+    type: 3}
+  MonsterMaterial: {fileID: 2100000, guid: 06fb14b38db571144ab3da655ab32720, type: 2}
   MovingSpeed: 0
   IdleMinDuration: 0
   IdleMaxDuration: 0
@@ -22,10 +25,15 @@ MonoBehaviour:
   - Radius: 15
     Angle: 360
     AngleOffset: 0
-  CaptureChance: 0
+  CaptureChance: 0.5
+  Ground:
+    serializedVersion: 2
+    m_Bits: 256
   ShootAngle: 35
   ShootRadius: 15
   TurnTendency: 50
-  PushForce: 5
-  PushDuration: 0.5
+  PushForce: 0
+  PushDuration: 0
   ResetTime: 2
+  PushFieldPrefab: {fileID: 6369517824465960477, guid: b3ae2572db1e3bb47ab69f86820bcf04,
+    type: 3}
