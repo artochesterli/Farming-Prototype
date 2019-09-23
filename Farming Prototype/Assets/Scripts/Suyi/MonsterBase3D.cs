@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterBase3D : MonoBehaviour, ICapturable, IUseable
+public abstract class MonsterBase3D : MonoBehaviour, ICapturable
 {
     public MonsterBaseScriptableObject3D MonsterData;
     public bool Capturable { get => _capturable; set => _capturable = value; }
-    private bool _capturable = true;
-
+    protected bool _capturable = true;
+    protected float _CaptureChance
+    {
+        get
+        {
+            return MonsterData.CaptureChance / SpeedMultiplier;
+        }
+    }
     protected GameObject _Player;
+    protected float SpeedMultiplier = 1f;
+    public MonsterTransform _monsterTransform;
 
     protected virtual void Awake()
     {
@@ -29,7 +37,11 @@ public abstract class MonsterBase3D : MonoBehaviour, ICapturable, IUseable
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="chance">The Chance of the Ball</param>
+    /// <returns></returns>
     public abstract bool OnHit(float chance);
     public abstract void OnCapture();
-    public abstract void OnUse(PlayerController pc);
 }

@@ -155,7 +155,8 @@ public class PlayerController : MonoBehaviour
             int ik = _inventoryKeyDown;
             if (ik != 0)
             {
-                Context._inventory.Items[ik - 1].Useable.OnUse(Context);
+                if (Context._inventory.Items.Count > ik - 1)
+                    Context._inventory.Items[ik - 1].MonsterTransform.OnUse();
             }
 
             if (_captureTimer < Time.time && Context.CaptureCharge >= 0f)

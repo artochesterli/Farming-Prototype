@@ -11,6 +11,7 @@ public class MonsterBuffalo : MonsterBase3D
         base.Awake();
         _buffaloFSM = new FSM<MonsterBuffalo>(this);
         _buffaloFSM.TransitionTo<BuffaloIdleState>();
+        _monsterTransform = new BuffaloTransform();
     }
 
     private void Update()
@@ -33,6 +34,21 @@ public class MonsterBuffalo : MonsterBase3D
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("StickyField"))
+        {
+            SpeedMultiplier = 0.1f;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("StickyField"))
+        {
+            SpeedMultiplier = 1f;
+        }
+    }
     private abstract class BuffaloState : FSM<MonsterBuffalo>.State
     {
         protected BuffaloData _buffaloData;
@@ -73,7 +89,7 @@ public class MonsterBuffalo : MonsterBase3D
         public override void OnEnter()
         {
             base.OnEnter();
-            _stareTimer = Time.time + Random.Range(_buffaloData.StareMinDuration, _buffaloData.StareMaxDuration);
+            _stareTimer = Time.time + Random.Range(_buffaloData.StareMinDuration, _buffaloData.StareMaxDuration) / Context.SpeedMultiplier;
         }
 
         public override void Update()
@@ -117,7 +133,7 @@ public class MonsterBuffalo : MonsterBase3D
                 float angle = Vector3.SignedAngle(Context.transform.forward, _dir, Vector3.up);
                 _dir = Quaternion.Euler(0f, (angle > 0 ? 1f : -1f) * _buffaloData.TurnTendency * Time.deltaTime, 0f) * Context.transform.forward;
                 Context.transform.eulerAngles = Vector3.up * Mathf.Atan2(_dir.x, _dir.z) * Mathf.Rad2Deg;
-                _rb.velocity = _dir * _buffaloData.ChargeSpeed;
+                _rb.velocity = _dir * _buffaloData.ChargeSpeed * Context.SpeedMultiplier;
             }
         }
     }
@@ -164,7 +180,7 @@ public class MonsterBuffalo : MonsterBase3D
             }
             else
             {
-                _rb.velocity = _dir * _buffaloData.MovingSpeed;
+                _rb.velocity = _dir * _buffaloData.MovingSpeed * Context.SpeedMultiplier;
             }
         }
     }
@@ -173,7 +189,7 @@ public class MonsterBuffalo : MonsterBase3D
     {
         float rand = Random.Range(0f, 1f);
         // If capture success
-        if (rand < chance)
+        if (rand < chance * _CaptureChance)
         {
             OnCapture();
             return true;
@@ -187,11 +203,6 @@ public class MonsterBuffalo : MonsterBase3D
 
     public override void OnCapture()
     {
-        GetComponent<MeshRenderer>().enabled = false;
-    }
-
-    public override void OnUse(PlayerController pc)
-    {
-        throw new System.NotImplementedException();
+        Destroy(gameObject);
     }
 }

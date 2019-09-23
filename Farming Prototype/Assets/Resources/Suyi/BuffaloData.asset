@@ -25,7 +25,7 @@ MonoBehaviour:
   CaptureChance: 1
   StareMinDuration: 1
   StareMaxDuration: 2
-  ChargeSpeed: 20
+  ChargeSpeed: 0
   TurnTendency: 50
   OverChargeTime: 0.5
   PushForce: 20

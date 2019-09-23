@@ -36,13 +36,14 @@ public class CaptureBasicBall : CaptureUtilityBase
                 sequence.Append(GetComponent<Rigidbody>().DOMove(Player.transform.position, 0.5f)
                 .OnComplete(() =>
                 {
-                    Player.GetComponent<PlayerInventory>().OnEnterBag(new Item(((MonsterBase3D)monster).MonsterData.InBagSprite, (IUseable)monster));
+                    Player.GetComponent<PlayerInventory>().OnEnterBag(new Item(((MonsterBase3D)monster).MonsterData.InBagSprite,
+                    ((MonsterBase3D)monster)._monsterTransform));
                     Destroy(gameObject);
                 }));
             }
             else
             {
-                monster.Capturable = true;
+                Destroy(gameObject);
             }
         });
 

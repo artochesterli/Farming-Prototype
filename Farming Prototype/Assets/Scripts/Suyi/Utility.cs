@@ -50,15 +50,16 @@ public interface IUseable
     void OnUse(PlayerController pc);
 }
 
+[Serializable]
 public class Item
 {
     public Sprite InBagSprite;
-    public IUseable Useable;
+    public MonsterTransform MonsterTransform;
 
-    public Item(Sprite inBagSprite, IUseable useable)
+    public Item(Sprite inBagSprite, MonsterTransform _MonsterTransform)
     {
         InBagSprite = inBagSprite;
-        Useable = useable;
+        MonsterTransform = _MonsterTransform;
     }
 }
 

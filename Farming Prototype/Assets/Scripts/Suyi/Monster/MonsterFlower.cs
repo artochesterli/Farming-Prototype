@@ -13,6 +13,7 @@ public class MonsterFlower : MonsterBase3D
         base.Awake();
         _flowerFSM = new FSM<MonsterFlower>(this);
         _flowerFSM.TransitionTo<FlowerIdleState>();
+        _monsterTransform = new FlowerTransform();
         _pushField = transform.Find("PushField").GetComponent<ParticleSystem>();
         _flowerData = MonsterData as FlowerMonsterData;
         var main = _pushField.main;
@@ -124,8 +125,4 @@ public class MonsterFlower : MonsterBase3D
         throw new System.NotImplementedException();
     }
 
-    public override void OnUse(PlayerController pc)
-    {
-        throw new System.NotImplementedException();
-    }
 }
