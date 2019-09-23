@@ -32,8 +32,8 @@ MonoBehaviour:
   ShootAngle: 35
   ShootRadius: 15
   TurnTendency: 50
-  PushForce: 0
-  PushDuration: 0
+  PushForce: 5
+  PushDuration: 0.5
   ResetTime: 2
   PushFieldPrefab: {fileID: 6369517824465960477, guid: b3ae2572db1e3bb47ab69f86820bcf04,
     type: 3}
