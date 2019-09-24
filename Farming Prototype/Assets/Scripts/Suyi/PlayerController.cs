@@ -48,15 +48,16 @@ public class PlayerController : MonoBehaviour
         seq.Append(transform.DOMove(_finalPos, impact.Duration));
         seq.AppendCallback(() =>
         {
-            _playerMovementFSM.TransitionTo<MovementIdleState>();
+            if (!_playerMovementFSM.CurrentState.GetType().Equals(typeof(TransformMovementState)))
+                _playerMovementFSM.TransitionTo<MovementIdleState>();
         });
     }
 
     public void OnTransform<T>(MonsterBaseScriptableObject3D _data) where T : MonsterBase3D
     {
-        foreach (var d in GetComponents<MonsterBase3D>())
+        foreach (var d in GetComponents<IComponentable>())
         {
-            Destroy(d);
+            Destroy(d as MonoBehaviour);
         }
         gameObject.AddComponent<T>();
         GetComponent<T>().MonsterData = _data;
@@ -69,9 +70,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnTransformBack()
     {
-        foreach (var d in GetComponents<MonsterBase3D>())
+        foreach (var d in GetComponents<IComponentable>())
         {
-            Destroy(d);
+            Destroy(d as MonoBehaviour);
         }
         GetComponent<MeshFilter>().mesh = PlayerData.PlayerMesh;
         GetComponent<Renderer>().material = PlayerData.PlayerMaterial;

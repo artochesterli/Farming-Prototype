@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SlimeData", menuName = "FarmingPrototype/Monster/SlimeData", order = 1)]
-public class SlimeData : MonsterBaseScriptableObject
+public class SlimeData : MonsterBaseScriptableObject3D
 {
-	public GameObject SlimeWaterPrefab;
-	public float SlimeWaterExistanceDuration = 10f;
-	public float SlimeWaterEmitInterval = 1f;
-	public float SlimeWaterSuprisedEmitInterval = 0.5f;
+    public float NormalSpeed = 6;
+    public float StickySlowDownSpeed = 6;
+    public float PushSpeed = 6;
+
+    public float FieldInitSize = 1;
+    public float FieldMaxSize = 4;
+    public float FieldGenerationTime = 2;
+    public float FieldGenerationCoolDown = 3;
 }

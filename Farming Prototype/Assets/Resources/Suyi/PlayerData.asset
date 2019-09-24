@@ -23,9 +23,9 @@ MonoBehaviour:
   ThrowBallRange: 15
   ThrowBallPower: 3
   ThrowBallToDestinationDuration: 0.5
-  ThrowBallInterval: 0.2
+  ThrowBallInterval: 1
   ThrowBallPrefab: {fileID: 4722759710045117100, guid: f86289d6878ef514a9e5f3d8ab63c21c,
     type: 3}
   ThrowBallMouseCastLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4294967295

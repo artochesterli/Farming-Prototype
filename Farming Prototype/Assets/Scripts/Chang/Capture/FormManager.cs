@@ -26,7 +26,7 @@ public class FormManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckInput();
+        // CheckInput();
         if (GetComponent<MeshCollider>())
         {
             GetComponent<MeshCollider>().convex = true;
@@ -61,7 +61,7 @@ public class FormManager : MonoBehaviour
 
         if (InputBull())
         {
-            if(CurrentForm == Form.Bull)
+            if (CurrentForm == Form.Bull)
             {
                 BackToCharacter();
             }
@@ -245,7 +245,7 @@ public class FormManager : MonoBehaviour
         GetComponent<FlowerAbility>().PushFieldCanvas = (GameObject)Instantiate(Resources.Load("Chang/Prefabs/Static/PushFieldCanvas"));
         GetComponent<FlowerAbility>().PushFieldCanvas.transform.position = transform.position;
         GetComponent<FlowerAbility>().PushFieldCanvas.transform.parent = transform;
-        GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<RectTransform>().localRotation= Quaternion.Euler(90, 0, 0);
+        GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<RectTransform>().localRotation = Quaternion.Euler(90, 0, 0);
         GetComponent<FlowerAbility>().PushFieldCanvas.GetComponent<Canvas>().worldCamera = Camera.main;
 
         var FlowerData = GetComponent<FlowerData>();
@@ -268,7 +268,7 @@ public class FormManager : MonoBehaviour
 
     private void ClearTempComponents()
     {
-        for(int i = 0; i < TemporaryMonsterComponents.Count; i++)
+        for (int i = 0; i < TemporaryMonsterComponents.Count; i++)
         {
             Destroy(TemporaryMonsterComponents[i]);
         }

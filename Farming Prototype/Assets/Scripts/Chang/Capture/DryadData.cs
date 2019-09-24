@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DryadData : MonoBehaviour
+public class DryadData : MonoBehaviour, IComponentable
 {
     public float NormalSpeed = 12;
     public float StickySlowDownSpeed = 1;
@@ -26,6 +26,6 @@ public class DryadData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

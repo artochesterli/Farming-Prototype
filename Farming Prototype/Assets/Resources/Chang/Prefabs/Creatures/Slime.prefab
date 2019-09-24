@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149fcd09f31480f41bc1aaaa4a5b6a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MonsterData: {fileID: 11400000, guid: 1780cccfffc19314eaef6a6bc9c18d1b, type: 2}
 --- !u!114 &4068596527487716132
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeMonsterData : MonoBehaviour
+public class SlimeMonsterData : MonoBehaviour, IComponentable
 {
     public float NormalSpeed = 6;
     public float StickySlowDownSpeed = 6;
@@ -25,6 +25,6 @@ public class SlimeMonsterData : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

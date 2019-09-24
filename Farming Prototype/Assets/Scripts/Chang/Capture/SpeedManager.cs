@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpeedManager : MonoBehaviour
+public class SpeedManager : MonoBehaviour, IComponentable
 {
     public Vector3 SelfSpeed;
     public Vector3 ForcedSpeed;
@@ -15,7 +15,7 @@ public class SpeedManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

@@ -50,6 +50,8 @@ public interface IUseable
     void OnUse(PlayerController pc);
 }
 
+public interface IComponentable { }
+
 [Serializable]
 public class Item
 {

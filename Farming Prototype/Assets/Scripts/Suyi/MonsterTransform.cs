@@ -30,6 +30,7 @@ public class BuffaloTransform : MonsterTransform
     public override void OnUse()
     {
         Player.GetComponent<PlayerController>().OnTransform<MonsterBuffalo>(BuffaloData);
+        Player.GetComponent<FormManager>().CurrentForm = Form.Bull;
     }
 }
 
@@ -54,5 +55,53 @@ public class FlowerTransform : MonsterTransform
     public override void OnUse()
     {
         Player.GetComponent<PlayerController>().OnTransform<MonsterFlower>(FlowerData);
+        Player.GetComponent<FormManager>().CurrentForm = Form.Flower;
+    }
+}
+
+public class SlimeTransform : MonsterTransform
+{
+    public SlimeData SlimeData;
+    public GameObject Player;
+    public SlimeTransform(SlimeData _bd)
+    {
+        SlimeData = _bd;
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public SlimeTransform(SlimeTransform _bf)
+    {
+        SlimeData = _bf.SlimeData;
+        Player = _bf.Player;
+    }
+
+    public override void OnUse()
+    {
+        Player.GetComponent<PlayerController>().OnTransform<SlimeAI>(SlimeData);
+        Player.GetComponent<FormManager>().CurrentForm = Form.Slime;
+    }
+}
+
+public class DryadTransform : MonsterTransform
+{
+    public MonsterDryadData DryadData;
+    public GameObject Player;
+    public DryadTransform(MonsterDryadData _bd)
+    {
+        DryadData = _bd;
+        Player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public DryadTransform(DryadTransform _bf)
+    {
+        DryadData = _bf.DryadData;
+        Player = _bf.Player;
+    }
+
+    public override void OnUse()
+    {
+        Player.GetComponent<PlayerController>().OnTransform<DryadAI>(DryadData);
+        Player.GetComponent<FormManager>().CurrentForm = Form.Dryad;
+
     }
 }

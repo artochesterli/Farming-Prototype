@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MonsterBase3D : MonoBehaviour, ICapturable
+public abstract class MonsterBase3D : MonoBehaviour, ICapturable, IComponentable
 {
     public MonsterBaseScriptableObject3D MonsterData;
     public bool Capturable { get => _capturable; set => _capturable = value; }
     protected bool _capturable = true;
-    protected float _CaptureChance
+    protected virtual float _CaptureChance
     {
         get
         {

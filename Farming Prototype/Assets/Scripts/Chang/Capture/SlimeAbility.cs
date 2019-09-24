@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeAbility : MonoBehaviour
+public class SlimeAbility : MonoBehaviour, IComponentable
 {
     private float GenerateTimeCount;
     private GameObject Field;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class SlimeAbility : MonoBehaviour
     private void Generating()
     {
         var SlimeData = GetComponent<SlimeMonsterData>();
-        if(GetComponent<SlimeActionStateManager>().CurrentState == SlimeActionState.Generating)
+        if (GetComponent<SlimeActionStateManager>().CurrentState == SlimeActionState.Generating)
         {
             GenerateTimeCount += Time.deltaTime;
             Field.transform.localScale = Vector3.Lerp(new Vector3(SlimeData.FieldInitSize, 1, SlimeData.FieldInitSize), new Vector3(SlimeData.FieldMaxSize, 1, SlimeData.FieldMaxSize), GenerateTimeCount / SlimeData.FieldGenerationTime);

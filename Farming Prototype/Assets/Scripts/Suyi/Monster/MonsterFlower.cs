@@ -50,11 +50,6 @@ public class MonsterFlower : MonsterBase3D
 
     private abstract class FlowerState : FSM<MonsterFlower>.State
     {
-        public override void OnEnter()
-        {
-            base.OnEnter();
-            print(GetType().Name);
-        }
     }
 
     private class ControllableFlowerIdleState : FlowerState

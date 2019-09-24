@@ -180,7 +180,7 @@ public class MonsterBuffalo : MonsterBase3D
         public override void OnEnter()
         {
             base.OnEnter();
-            _stareTimer = Time.time + Random.Range(_buffaloData.StareMinDuration, _buffaloData.StareMaxDuration) / Context.SpeedMultiplier;
+            _stareTimer = Time.time + Random.Range(_buffaloData.StareMinDuration, _buffaloData.StareMaxDuration);
         }
 
         public override void Update()

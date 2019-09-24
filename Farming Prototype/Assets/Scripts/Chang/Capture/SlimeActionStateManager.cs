@@ -8,7 +8,7 @@ public enum SlimeActionState
     Generating
 }
 
-public class SlimeActionStateManager : MonoBehaviour
+public class SlimeActionStateManager : MonoBehaviour, IComponentable
 {
     public SlimeActionState CurrentState;
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class SlimeActionStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetActionState(SlimeActionState State)
@@ -45,5 +45,5 @@ public class SlimeActionStateManager : MonoBehaviour
         }
     }
 
-    
+
 }

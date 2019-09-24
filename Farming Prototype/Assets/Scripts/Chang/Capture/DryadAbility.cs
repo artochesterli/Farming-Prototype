@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DryadAbility : MonoBehaviour
+public class DryadAbility : MonoBehaviour, IComponentable
 {
     private float DodgeTimeCount;
     private int ThornCount;
@@ -11,14 +11,14 @@ public class DryadAbility : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckInput();
-        
+
     }
 
     private void FixedUpdate()
@@ -28,7 +28,7 @@ public class DryadAbility : MonoBehaviour
 
     private void CheckInput()
     {
-        if(InputAvailable()&& CompareTag("Player") && GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Normal)
+        if (InputAvailable() && CompareTag("Player") && GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Normal)
         {
             /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -89,9 +89,9 @@ public class DryadAbility : MonoBehaviour
             }
 
             DodgeTimeCount += Time.deltaTime;
-            if (DodgeTimeCount >= ThornCount * ThornInterval && ThornCount<DryadData.ThornNumber)
+            if (DodgeTimeCount >= ThornCount * ThornInterval && ThornCount < DryadData.ThornNumber)
             {
-                Instantiate(Resources.Load("Chang/Prefabs/Static/Thorn"), StartPos + Direction*ThornDisInterval*ThornCount, Quaternion.Euler(0, 0, 0));
+                Instantiate(Resources.Load("Chang/Prefabs/Static/Thorn"), StartPos + Direction * ThornDisInterval * ThornCount, Quaternion.Euler(0, 0, 0));
                 ThornCount++;
             }
             if (DodgeTimeCount >= DryadData.DodgeTime)
@@ -103,11 +103,11 @@ public class DryadAbility : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Dodging)
+        if (GetComponent<DryadActionStateManager>().CurrentState == DryadActionState.Dodging)
         {
             StopDodge();
         }
     }
 
-    
+
 }

@@ -8,7 +8,7 @@ public enum DryadActionState
     Dodging
 }
 
-public class DryadActionStateManager : MonoBehaviour
+public class DryadActionStateManager : MonoBehaviour, IComponentable
 {
     public DryadActionState CurrentState;
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class DryadActionStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetActionState(DryadActionState State)
